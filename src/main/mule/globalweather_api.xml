@@ -64,6 +64,51 @@ ns soap http://schemas.xmlsoap.org/soap/envelope
 					</ee:message>
 				</ee:transform>
 			</on-error-propagate>
+			<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="c7a1ed06-dc23-425b-bcf7-412c36ea7a98" type="APIKIT:BAD_REQUEST">
+				<ee:transform doc:name="Bad Request Error" doc:id="93156dc9-a51e-4304-9da3-7ce51407c979" >
+					<ee:message >
+						<ee:set-payload ><![CDATA[%dw 2.0
+output application/xml
+---
+{
+	"Error" : "Bad Request " ++ error.detailedDescription as String
+}]]></ee:set-payload>
+					</ee:message>
+					<ee:variables >
+						<ee:set-variable variableName="httpStatus" ><![CDATA[400]]></ee:set-variable>
+					</ee:variables>
+				</ee:transform>
+			</on-error-propagate>
+			<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="45519a74-d30d-4031-a01e-57a78e2d3b4e" type="APIKIT:NOT_FOUND">
+				<ee:transform doc:name="Not Found" doc:id="ce1b328f-1477-48d4-8139-58b9c5bdb741" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd" >
+					<ee:message >
+						<ee:set-payload ><![CDATA[%dw 2.0
+output application/xml
+---
+{
+	"Error" : "Not Found " ++ error.detailedDescription as String
+}]]></ee:set-payload>
+					</ee:message>
+					<ee:variables >
+						<ee:set-variable variableName="httpStatus" ><![CDATA[404]]></ee:set-variable>
+					</ee:variables>
+				</ee:transform>
+			</on-error-propagate>
+			<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="9fb228cb-5bf2-4c96-a20e-c5fe137d72f6" type="ANY">
+				<ee:transform doc:name="Internal Server Error" doc:id="deebe63a-c281-409b-ab88-0309052e7c84" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd" >
+					<ee:message >
+						<ee:set-payload ><![CDATA[%dw 2.0
+output application/xml
+---
+{
+	"Error" : "Internal Server Error " ++ error.detailedDescription as String
+}]]></ee:set-payload>
+					</ee:message>
+					<ee:variables >
+						<ee:set-variable variableName="httpStatus" ><![CDATA[500]]></ee:set-variable>
+					</ee:variables>
+				</ee:transform>
+			</on-error-propagate>
 		</error-handler>
     </flow>
     
@@ -1074,6 +1119,20 @@ output application/xml
 }]]></ee:set-payload>
             </ee:message>
         </ee:transform>
+		<error-handler >
+			<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="a173fd2a-5cf1-4d59-b38d-e408141f73a6" type="ANY">
+				<ee:transform doc:name="Error Response" doc:id="72143d44-d7bd-4d63-a0ca-c69fcdaba788" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd" >
+					<ee:message >
+						<ee:set-payload ><![CDATA[%dw 2.0
+output application/xml
+---
+{
+	"Error" : "Internal Server Error " ++ error.detailedDescription as String
+}]]></ee:set-payload>
+					</ee:message>
+				</ee:transform>
+			</on-error-propagate>
+		</error-handler>
     </flow>
     <flow name="get:\GetWeather:GlobalWeatherHttp-Config">
         <ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd" doc:id="a2889b52-48d8-4c91-811c-ce578c3bef90" doc:name="Reply Mock Response">
@@ -1096,6 +1155,20 @@ output application/xml
 }]]></ee:set-payload>
             </ee:message>
         </ee:transform>
+        		<error-handler >
+			<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="d140914e-dd38-46f8-88a3-7656c409bf6c" type="ANY">
+				<ee:transform doc:name="Error Response" doc:id="f9c993d4-2c7d-439a-bc53-0162f1dc9f50" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd" >
+					<ee:message >
+						<ee:set-payload ><![CDATA[%dw 2.0
+output application/xml
+---
+{
+	"Error" : "Internal Server Error " ++ error.detailedDescription as String
+}]]></ee:set-payload>
+					</ee:message>
+				</ee:transform>
+			</on-error-propagate>
+		</error-handler>
     </flow>
     <flow name="post:\GetCitiesByCountry:application\x-www-form-urlencoded:GlobalWeatherHttp-Config">
         <ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd" doc:id="d664fddf-2edd-427a-a311-a21ae70e2979" doc:name="Reply Mock Response">
@@ -1375,6 +1448,20 @@ output application/xml
 }]]></ee:set-payload>
             </ee:message>
         </ee:transform>
+        		<error-handler >
+			<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="e691a6d8-ed26-4a46-b58d-a33b7736ffe6" type="ANY">
+				<ee:transform doc:name="Error Response" doc:id="8cc002e1-7035-490e-966e-735842357ac6" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd" >
+					<ee:message >
+						<ee:set-payload ><![CDATA[%dw 2.0
+output application/xml
+---
+{
+	"Error" : "Internal Server Error " ++ error.detailedDescription as String
+}]]></ee:set-payload>
+					</ee:message>
+				</ee:transform>
+			</on-error-propagate>
+		</error-handler>
     </flow>
     <flow name="post:\GetWeather:application\x-www-form-urlencoded:GlobalWeatherHttp-Config">
         <ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd" doc:id="c728ff95-b754-4234-8781-9f52fd7e04fc" doc:name="Reply Mock Response">
@@ -1397,6 +1484,20 @@ output application/xml
 }]]></ee:set-payload>
             </ee:message>
         </ee:transform>
+        		<error-handler >
+			<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="07b41dae-368c-430c-8699-d04cdad60df7" type="ANY">
+				<ee:transform doc:name="Error Response" doc:id="23982ba0-344c-41e5-8781-0eda519125a2" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd" >
+					<ee:message >
+						<ee:set-payload ><![CDATA[%dw 2.0
+output application/xml
+---
+{
+	"Error" : "Internal Server Error " ++ error.detailedDescription as String
+}]]></ee:set-payload>
+					</ee:message>
+				</ee:transform>
+			</on-error-propagate>
+		</error-handler>
     </flow>
 	
 </mule>
