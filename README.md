@@ -1,2 +1,8 @@
 # Global Weather API
-Get weather report for all major cities around the world.
+
+## Author
+Name: Susmit Dey
+Email: susridey2@gmail.com
+
+## Please check below Wiki page for the Technical Details
+[https://github.com/susmind/globalweather/wiki/Global-Weather-API-Implementation](https://github.com/susmind/globalweather/wiki/Global-Weather-API-Implementation)
