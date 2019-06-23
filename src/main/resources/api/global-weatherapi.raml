@@ -1,0 +1,154 @@
+#%RAML 1.0
+title: GlobalWeatherAPI
+baseUri: http://localhost:8080/GlobalWeather
+description: This API is used for reporting Global Weather
+version: 1.0
+
+uses:
+  common: dataTypes/global-weather.lib.raml
+
+/GetCitiesByCountry:
+  description: Get all major cities by country name(full / part).
+  get:
+    queryParameters:
+      CountryName:
+        type: string
+        required: true
+    responses:
+      200:
+        description: Success
+        body:
+          application/xml:
+            type: common.GetCitiesByCountryResponse
+            example: !include examples/GetCitiesByCountryResponseExample.raml
+      400:
+        description: Bad Request Error
+        body:
+          application/xml:
+            type: common.ErrorResponse
+            example: !include examples/ErrorResponseExample.raml
+      500:
+        description: Internal Server Error
+        body:
+          application/xml:
+            type: common.ErrorResponse
+            example: !include examples/ErrorResponseExample.raml
+      404:
+        description: Not Found Error
+        body:
+          application/xml:
+            type: common.ErrorResponse
+            example: !include examples/ErrorResponseExample.raml
+  post:
+    body:
+      application/x-www-form-urlencoded:
+        properties:
+          CountryName:
+            type: string
+            required: true
+    responses:
+      200:
+        description: Success
+        body:
+          application/xml:
+            type: common.GetCitiesByCountryResponse
+            example: !include examples/GetCitiesByCountryResponseExample.raml
+      400:
+        description: Bad Request Error
+        body:
+          application/xml:
+            type: common.ErrorResponse
+            example: !include examples/ErrorResponseExample.raml
+      500:
+        description: Internal Server Error
+        body:
+          application/xml:
+            type: common.ErrorResponse
+            example: !include examples/ErrorResponseExample.raml
+      404:
+        description: Not Found Error
+        body:
+          application/xml:
+            type: common.ErrorResponse
+            example: !include examples/ErrorResponseExample.raml
+
+/GetWeather:
+  description: Get weather report for all major cities around the world.
+  get:
+    queryParameters:
+      CityName:
+        type: string
+        required: true
+      CountryName:
+        type: string
+        required: true
+    responses:
+      200:
+        description: Success
+        body:
+          application/xml:
+            type: common.GetWeatherResponse
+            example: !include examples/GetWeatherResponseExample.raml
+      400:
+        description: Bad Request Error
+        body:
+          application/xml:
+            type: common.ErrorResponse
+            example: !include examples/ErrorResponseExample.raml
+      500:
+        description: Internal Server Error
+        body:
+          application/xml:
+            type: common.ErrorResponse
+            example: !include examples/ErrorResponseExample.raml
+      404:
+        description: Not Found Error
+        body:
+          application/xml:
+            type: common.ErrorResponse
+            example: !include examples/ErrorResponseExample.raml
+  post:
+    body:
+      application/x-www-form-urlencoded:
+        properties:
+          CityName:
+            type: string
+            required: true
+          CountryName:
+            type: string
+            required: true
+    responses:
+      200:
+        description: Success
+        body:
+          application/xml:
+            type: common.GetWeatherResponse
+            example: !include examples/GetWeatherResponseExample.raml
+      400:
+        description: Bad Request Error
+        body:
+          application/xml:
+            type: common.ErrorResponse
+            example: !include examples/ErrorResponseExample.raml
+      500:
+        description: Internal Server Error
+        body:
+          application/xml:
+            type: common.ErrorResponse
+            example: !include examples/ErrorResponseExample.raml
+      404:
+        description: Not Found Error
+        body:
+          application/xml:
+            type: common.ErrorResponse
+            example: !include examples/ErrorResponseExample.raml
+
+
+
+
+      
+
+
+        
+        
+          

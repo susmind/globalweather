@@ -1,0 +1,38 @@
+#%RAML 1.0 DataType
+displayName: Get Weather Response Type
+type: object
+required : false
+properties:
+  NewDataSet:
+    type: object
+    required: true
+    properties:     
+      Location:
+        type: string
+        required: true
+      Time:
+        type: string
+        required: true
+      Wind:
+        type: string
+        required: true
+      Visibility:
+        type: string
+        required: true
+      SkyConditions:
+        type: string
+        required: true
+      Temperature:
+        type: number
+        required: true
+      DewPoint:
+        type: string
+        required: true
+      RelativeHumidity:
+        type: number
+        required: true
+      Status:
+        type: string
+        required: true
+
+    
