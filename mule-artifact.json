@@ -1,0 +1,13 @@
+{
+	"redeploymentEnabled": true,
+	"classLoaderModelLoaderDescriptor": {
+		"attributes": {
+			"exportedResources": [
+				"/api/global-weatherapi.raml",
+				"/api/global-weather.wsdl"
+			]
+		},
+		"id": "mule"
+	},
+	"minMuleVersion": "4.1.4"
+}
